@@ -3,23 +3,23 @@ import { ProductProps } from '../components/Product';
 
 interface cartProps{
     items: {id:number,quantity:number}[],
-    incrementaItem:(novoItem:{id:number,quantity:number})=>void,
-    decrementaItem:(novoItem:{id:number,quantity:number})=>void,
+    incrementaItem:(idNovoItem:number)=>void,
+    decrementaItem:(idNovoItem:number)=>void,
 }
 
 export const useCart = create<cartProps>((set)=> ({
     items:[],
-    incrementaItem:(novoItem)=>set(({items})=>{
-            let checkForItem = items.find(element=>element.id===novoItem.id)
+    incrementaItem:(idNovoItem)=>set(({items})=>{
+            let checkForItem = items.find(element=>element.id===idNovoItem)
             if (checkForItem){
                 checkForItem.quantity+=1
                 console.log(items)
             }else{
-                items.push(novoItem)
+                items.push({id:idNovoItem,quantity:1})
             } 
         }),
-        decrementaItem:(novoItem)=>set(({items})=>{
-            let checkForItem = items.find(element=>element.id===novoItem.id)
+        decrementaItem:(idNovoItem)=>set(({items})=>{
+            let checkForItem = items.find(element=>element.id===idNovoItem)
             if (checkForItem && checkForItem.quantity>0 ){
                 checkForItem.quantity-=1
                 console.log(items)

@@ -22,13 +22,13 @@ const Incrementor = ({ id, quantity }: IncrementorProps) => {
   return (
       <Wrapper>
       <IconWrapper>
-        <SubtractIcon onClick={()=>decrementaItem({id,quantity})} aria-label="Subtract item" />
+        <SubtractIcon onClick={()=>decrementaItem(id)} aria-label="Subtract item" />
       </IconWrapper>
 
       <Quantity>{quantidadeItem ? quantidadeItem : 0 }</Quantity>
 
       <IconWrapper>
-        <PlusIcon onClick={()=>incrementaItem({id,quantity})} aria-label="Add item" />
+        <PlusIcon onClick={()=>incrementaItem(id)} aria-label="Add item" />
       </IconWrapper>
     </Wrapper>
 )};

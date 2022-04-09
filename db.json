@@ -42,5 +42,13 @@
       "quantity": 2,
       "price": 299.50
     }
+  ],
+  "usuarios":[
+    {
+      "id": 1,
+      "name": "User 1",
+      "email": ""
+    }    
   ]
 }
+

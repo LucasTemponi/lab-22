@@ -23,7 +23,7 @@ const Home = () => {
       <Header setIsOpen={setIsOpen} />
       <Container>
         {products?.map(element => {
-          return <Product {...element} />
+          return <Product key={element.id} {...element} />
         })}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>

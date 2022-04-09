@@ -19,7 +19,7 @@ const Product = ({ id, name, price, picture }: ProductProps) => (
       </Column>
 
       <WrapperIncrementor>
-        <Incrementor id={id} quantity={1} />
+        <Incrementor {...{id,name,picture,price}} />
       </WrapperIncrementor>
     </Info>
   </Wrapper>

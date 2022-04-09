@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product, { ProductProps } from "../components/Product";
-
-const data: ProductProps = {
-  id: 1,
-  name: "Product 1",
-  picture:
-    "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
-  price: 20.50,
-};
+import axios from 'axios'
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [products,setProducts] = useState<ProductProps[]>()
+
+  const getData = async ()=>{
+    const response = await axios.get('http://localhost:3001/products')
+    setProducts(response.data)    
+  }
+
+  useEffect(()=>{
+    getData();
+  },[])
 
   return (
     <>
       <Header setIsOpen={setIsOpen} />
       <Container>
-        <Product {...data} />
+        {products?.map(element => {
+          return <Product key={element.id} {...element} />
+        })}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
     </>

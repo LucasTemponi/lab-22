@@ -14,3 +14,15 @@ export const Wrapper = styled.header`
     width: 3rem;
   }
 `;
+
+export const NotificationBadge = styled.span`
+  position: relative;
+  top: 1rem;
+  right: 1.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background-color: lightgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;`

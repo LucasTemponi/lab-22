@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { CloseOutline } from "@styled-icons/evaicons-outline";
 
-import axios from 'axios';
-
 import Button from "../Button";
 import Typography from "../Typography";
 import Product from "../Product";
@@ -27,13 +25,7 @@ export type MenuPaymentProps = {
 
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
   const  itemsCarrinho = useCart(state => (state.items));
-
-  const buscaInfoItemsCarrinho = async () => {
-    const response = await axios.get(
-      "http://localhost:3001/products"
-    );
-    return response.data;
-  }
+  const total = useCart(state => (state.precoTotal));
 
 
   return(
@@ -45,13 +37,13 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
       {itemsCarrinho?.map(element => {
-          return <Product {...element} price={0} picture={''} name={''} />
+          return <Product {...element}/>
         })}
       <Subtotal>
         <Typography level={5} size="large" fontWeight={600}>
           Total
         </Typography>
-        <Typography>1,600.50</Typography>
+        <Typography>{total}</Typography>
       </Subtotal>
 
       <Button fullWidth>Finalizar compra</Button>

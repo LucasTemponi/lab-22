@@ -2,33 +2,38 @@ import create from 'zustand'
 import { ProductProps } from '../components/Product';
 
 interface cartProps{
-    items: {id:number,quantity:number}[],
+    items: (ProductProps & {quantity:number})[],
     contaItems:number,
-    incrementaItem:(idNovoItem:number)=>void,
-    decrementaItem:(idNovoItem:number)=>void,
+    precoTotal:number,
+    incrementaItem:(novoItem:ProductProps)=>void,
+    decrementaItem:(novoItem:ProductProps)=>void,
 }
 
 export const useCart = create<cartProps>((set)=> ({
     items:[],
     contaItems:0,
     precoTotal:0,
-    incrementaItem:(idNovoItem)=>set((state)=>{
-            let checkForItem = state.items.find(element=>element.id===idNovoItem)
+    incrementaItem:(novoItem)=>set((state)=>{
+            let checkForItem = state.items.find(element=>element.id===novoItem.id)
             if (checkForItem){
                 checkForItem.quantity+=1;
                 state.contaItems+=1;
+                state.precoTotal+=novoItem.price;
                 console.log(state.items)
             }else{
-                state.items.push({id:idNovoItem,quantity:1})
+                state.items.push({...novoItem,quantity:1})
                 state.contaItems+=1;
+                state.precoTotal+=novoItem.price;
             } 
-            console.log(state.contaItems)
+            console.log(state)
         }),
-        decrementaItem:(idNovoItem)=>set(({items})=>{
-            let checkForItem = items.find(element=>element.id===idNovoItem)
+        decrementaItem:(novoItem)=>set((state)=>{
+            let checkForItem = state.items.find(element=>element.id===novoItem.id)
             if (checkForItem && checkForItem.quantity>0 ){
                 checkForItem.quantity-=1
-                console.log(items)
+                state.contaItems-=1;
+                state.precoTotal-=novoItem.price;
+                console.log(state)
             } 
         }),
     })

@@ -26,6 +26,7 @@ export type MenuPaymentProps = {
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
   const  itemsCarrinho = useCart(state => (state.items));
   const total = useCart(state => (state.precoTotal));
+  const priceFormatted = Intl.NumberFormat("pt-BR", {style:'currency',currency:'BRL'}).format(total);
 
 
   return(
@@ -43,7 +44,7 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         <Typography level={5} size="large" fontWeight={600}>
           Total
         </Typography>
-        <Typography>{total}</Typography>
+        <Typography>{priceFormatted}</Typography>
       </Subtotal>
 
       <Button fullWidth>Finalizar compra</Button>

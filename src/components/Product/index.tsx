@@ -8,21 +8,24 @@ export type ProductProps = {
   picture: string;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => (
-  <Wrapper>
-    <img src={picture} alt={`Imagem de referência ${name}`} />
+const Product = ({ id, name, price, picture }: ProductProps) => {
+  const priceFormatted = Intl.NumberFormat("pt-BR", {style:'currency',currency:'BRL'}).format(price);
+  return(
+    <Wrapper>
+      <img src={picture} alt={`Imagem de referência ${name}`} />
 
-    <Info>
-      <Column>
-        <Text>{name}</Text>
-        <Text>{price}</Text>
-      </Column>
+      <Info>
+        <Column>
+          <Text>{name}</Text>
+          <Text>{priceFormatted}</Text>
+        </Column>
 
-      <WrapperIncrementor>
-        <Incrementor {...{id,name,picture,price}} />
-      </WrapperIncrementor>
-    </Info>
-  </Wrapper>
-);
+        <WrapperIncrementor>
+          <Incrementor {...{id,name,picture,price}} />
+        </WrapperIncrementor>
+      </Info>
+    </Wrapper>
+  )
+}
 
 export default Product;

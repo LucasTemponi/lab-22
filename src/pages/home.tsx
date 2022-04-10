@@ -10,8 +10,12 @@ const Home = () => {
   const [products,setProducts] = useState<ProductProps[]>()
 
   const getData = async ()=>{
-    const response = await axios.get('http://localhost:3001/products')
-    setProducts(response.data)    
+    try{
+      const response = await axios.get('http://localhost:3001/products')
+      setProducts(response.data)    
+    }catch(error){
+      alert('Não foi possível carregar a página. Tente novamente mais tarde')
+    }
   }
 
   useEffect(()=>{

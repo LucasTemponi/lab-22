@@ -1,4 +1,4 @@
-import create from 'zustand'
+import create from 'zustand';
 import { ProductProps } from '../components/Product';
 
 interface cartProps{
@@ -20,6 +20,7 @@ export const useCart = create<cartProps>((set)=> ({
                 state.contaItems+=1;
                 state.precoTotal+=novoItem.price;                
             }else if(checkForItem.stock===checkForItem.quantity || checkForItem.stock===0){
+                alert(`No momento possuimos apenas ${checkForItem.stock} unidades deste produto`)
                 return;
             }else{
                 checkForItem.quantity+=1;
@@ -42,6 +43,6 @@ export const useCart = create<cartProps>((set)=> ({
                 state.contaItems-=1;
                 state.precoTotal-=novoItem.price;
             }
-        }),
+        })
     })
 )

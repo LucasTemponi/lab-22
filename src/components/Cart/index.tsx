@@ -44,7 +44,7 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         :(
           <>
           {itemsCarrinho.map(element => {
-            return <Product {...element}/>
+            return <Product {...element}/>;
           })}
           <Subtotal>
           <Typography level={5} size="large" fontWeight={600}>

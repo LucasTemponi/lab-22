@@ -2,9 +2,9 @@ import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
 export type ProductProps = {
-  id: number;
-  name: string;
-  price: number;
+  id: number,
+  name: string,
+  price: number,
   picture: string,
   stock:number;
 };

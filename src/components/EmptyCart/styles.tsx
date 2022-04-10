@@ -10,12 +10,6 @@ export const Wrapper = styled.div`
     background-color: ${theme.colors.white};
     border: 1px solid ${theme.colors.lightPink};
     border-radius: ${theme.border.radius.other};
-
-    img {
-      width: 12.5rem;
-      height: 12.5rem;
-      border-radius: ${theme.border.radius.other};
-    }
   `}
 `;
 
@@ -24,7 +18,8 @@ export const Info = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 3.8rem;
+  margin: 3.8rems;
+  height: 12.5em;
 
   ${media.lessThan("medium")`
     flex-direction: column;

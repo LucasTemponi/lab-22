@@ -13,9 +13,9 @@ const Header = ({ setIsOpen }: HeaderProps) => {
   const badge = useCart(state => state.contaItems);
 
   return(
-    <Wrapper>
-      <ShoppingIcon onClick={() => setIsOpen(true)} aria-label="Shopping Icon" />
-      { <NotificationBadge>{badge}</NotificationBadge>}
+    <Wrapper onClick={() => setIsOpen(true)}>
+      <ShoppingIcon aria-label="Shopping Icon" />
+      { <NotificationBadge >{badge}</NotificationBadge>}
     </Wrapper>
   )
 };

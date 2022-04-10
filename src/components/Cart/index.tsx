@@ -8,6 +8,7 @@ import Product from "../Product";
 import { Wrapper, Subtotal, Header } from "./styles";
 
 import { useCart } from "../../hooks/useCart";
+import EmptyCart from "../EmptyCart/EmptyCart";
 
 
 export type MenuPaymentProps = {
@@ -28,7 +29,6 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
   const total = useCart(state => (state.precoTotal));
   const priceFormatted = Intl.NumberFormat("pt-BR", {style:'currency',currency:'BRL'}).format(total);
 
-
   return(
     <Wrapper isOpen={isOpen}>
       <Header>
@@ -37,17 +37,25 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         </Typography>
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
-      {itemsCarrinho?.map(element => {
-          return <Product {...element}/>
-        })}
-      <Subtotal>
-        <Typography level={5} size="large" fontWeight={600}>
-          Total
-        </Typography>
-        <Typography>{priceFormatted}</Typography>
-      </Subtotal>
-
-      <Button fullWidth>Finalizar compra</Button>
+      {
+        itemsCarrinho.length === 0 ? (
+          <EmptyCart/>
+        )
+        :(
+          <>
+          {itemsCarrinho.map(element => {
+            return <Product {...element}/>
+          })}
+          <Subtotal>
+          <Typography level={5} size="large" fontWeight={600}>
+            Total
+          </Typography>
+          <Typography>{priceFormatted}</Typography>
+        </Subtotal>
+        <Button fullWidth>Finalizar compra</Button>
+        </>
+        )
+      }        
     </Wrapper>
   )
 };

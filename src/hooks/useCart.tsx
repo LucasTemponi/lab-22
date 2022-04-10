@@ -15,13 +15,14 @@ export const useCart = create<cartProps>((set)=> ({
     precoTotal:0,
     incrementaItem:(novoItem)=>set((state)=>{
             let checkForItem = state.items.find(element=>element.id===novoItem.id)
-            if (checkForItem){
-                checkForItem.quantity+=1;
-                state.contaItems+=1;
-                state.precoTotal+=novoItem.price;
-                console.log(state.items)
-            }else{
+            if (!checkForItem){
                 state.items.push({...novoItem,quantity:1})
+                state.contaItems+=1;
+                state.precoTotal+=novoItem.price;                
+            }else if(checkForItem.stock===checkForItem.quantity || checkForItem.stock===0){
+                return;
+            }else{
+                checkForItem.quantity+=1;
                 state.contaItems+=1;
                 state.precoTotal+=novoItem.price;
             } 
@@ -29,13 +30,18 @@ export const useCart = create<cartProps>((set)=> ({
         }),
         decrementaItem:(novoItem)=>set((state)=>{
             let checkForItem = state.items.find(element=>element.id===novoItem.id)
-            if (checkForItem && checkForItem.quantity>0 ){
+            if (!checkForItem){
+                return;
+            } else if (checkForItem.quantity===1 ){
+                const itemIndex = state.items.indexOf(checkForItem)
+                state.contaItems-=1;
+                state.precoTotal-=novoItem.price;
+                state.items.splice(itemIndex,1)
+            } else{
                 checkForItem.quantity-=1
                 state.contaItems-=1;
                 state.precoTotal-=novoItem.price;
-                console.log(state)
-            } 
+            }
         }),
     })
 )
-

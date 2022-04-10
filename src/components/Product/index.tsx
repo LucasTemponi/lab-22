@@ -5,10 +5,11 @@ export type ProductProps = {
   id: number;
   name: string;
   price: number;
-  picture: string;
+  picture: string,
+  stock:number;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => {
+const Product = ({ id, name, price, picture,stock }: ProductProps) => {
   const priceFormatted = Intl.NumberFormat("pt-BR", {style:'currency',currency:'BRL'}).format(price);
   return(
     <Wrapper>
@@ -21,7 +22,7 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
         </Column>
 
         <WrapperIncrementor>
-          <Incrementor {...{id,name,picture,price}} />
+          <Incrementor {...{id,name,picture,price,stock}} />
         </WrapperIncrementor>
       </Info>
     </Wrapper>
